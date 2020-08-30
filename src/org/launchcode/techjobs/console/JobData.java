@@ -38,6 +38,7 @@ public class JobData {
         for (HashMap<String, String> row : allJobs) {
             String aValue = row.get(field);
 
+            //avoid duplicate jobs
             if (!values.contains(aValue)) {
                 values.add(aValue);
             }
