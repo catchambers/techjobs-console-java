@@ -78,7 +78,7 @@ public class JobData {
 
             String aValue = row.get(column);
 
-            if (aValue.contains(value)) {
+            if (aValue.toLowerCase().contains(value)) {
                 jobs.add(row);
             }
         }
@@ -132,7 +132,7 @@ public class JobData {
      * inclusion of the search term. Match of search term can be in
      * any column.
      *
-     * @param value Value of teh field to search for
+     * @param value Value of the field to search for
      * @return List of all jobs matching the criteria
      */
     public static ArrayList<HashMap<String, String>> findByValue(String value) {
@@ -143,10 +143,12 @@ public class JobData {
         ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
 
         for (HashMap<String, String> row : allJobs) {
-
             for (Map.Entry<String, String> field: row.entrySet()) {
-                if (field.getValue().contains(value)) {
-                    jobs.add(row);
+                if (field.getValue().toLowerCase().contains(value)) {
+                    //avoid duplicate jobs
+                    if (!jobs.contains(row)) {
+                        jobs.add(row);
+                    }
                 }
             }
         }
